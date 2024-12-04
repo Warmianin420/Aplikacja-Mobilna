@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Pogoda</string>
+    <string name="btn_check_weather">Check Weather for Selected City</string>
+    <string-array name="city_array">
+        <item>Gdańsk</item>
+        <item>Kraków</item>
+        <item>Rzeszów</item>
+        <item>Warszawa</item>
+        <item>Wrocław</item>
+    </string-array>
+</resources>
