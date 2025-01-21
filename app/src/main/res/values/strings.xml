@@ -1,10 +1,20 @@
 <resources>
     <string name="app_name">Pogoda</string>
-    <string name="btn_check_weather">Check Weather for Selected City</string>
+    <string name="btn_check_weather">Sprawdź pogodę dla wybranego miasta</string>
     <string-array name="city_array">
+        <item>Białystok</item>
+        <item>Bydgoszcz</item>
         <item>Gdańsk</item>
+        <item>Jasło</item>
+        <item>Kielce</item>
         <item>Kraków</item>
+        <item>Lublin</item>
+        <item>Łódź</item>
+        <item>Opole</item>
+        <item>Poznań</item>
         <item>Rzeszów</item>
+        <item>Sybir</item>
+        <item>Szczecin</item>
         <item>Warszawa</item>
         <item>Wrocław</item>
     </string-array>

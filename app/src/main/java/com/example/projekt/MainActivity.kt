@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
             .build()
 
         val weatherApi = retrofit.create(WeatherApiService::class.java)
-        
+
         // Obsługa wyboru miasta z rozwijanej listy
         spinnerCity.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
