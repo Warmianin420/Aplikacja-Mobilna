@@ -75,6 +75,8 @@ dependencies {
     // Fragment KTX for working with fragments
     implementation("androidx.fragment:fragment-ktx:1.6.1")
 
+    implementation("androidx.cardview:cardview:1.0.0")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

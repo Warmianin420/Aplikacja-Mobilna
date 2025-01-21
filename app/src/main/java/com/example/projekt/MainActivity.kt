@@ -66,17 +66,22 @@ class MainActivity : AppCompatActivity() {
                         "metric" // Jednostki: stopnie Celsjusza
                     )
                     call.enqueue(object : Callback<WeatherResponse> {
-                        override fun onResponse(
-                            call: Call<WeatherResponse>,
-                            response: Response<WeatherResponse>
-                        ) {
+                        override fun onResponse(call: Call<WeatherResponse>, response: Response<WeatherResponse>) {
                             if (response.isSuccessful) {
                                 val weather = response.body()
-                                txtWeather.text = "Miasto: ${weather?.name}\n" +
-                                        "Temperatura: ${weather?.main?.temp}°C\n" +
-                                        "Opis: ${weather?.weather?.get(0)?.description}"
+                                txtWeather.text = """
+                                    Miasto: ${weather?.name}
+                                    Temperatura: ${weather?.main?.temp}°C
+                                    Wilgotność: ${weather?.main?.humidity}%
+                                    Ciśnienie: ${weather?.main?.pressure} hPa
+                                    Prędkość wiatru: ${weather?.wind?.speed} m/s
+                                    Kierunek wiatru: ${weather?.wind?.deg}°
+                                    Widoczność: ${weather?.visibility} m
+                                    Opis: ${weather?.weather?.joinToString { it.description }}
+                                """.trimIndent()
                             } else {
                                 txtWeather.text = "Nie udało się pobrać danych o pogodzie."
+                                Log.e("WeatherResponse", "Błąd odpowiedzi API: ${response.errorBody()?.string()}")
                             }
                         }
 
@@ -107,14 +112,21 @@ class MainActivity : AppCompatActivity() {
             if (selectedCity.isNotEmpty()) {
                 val call = weatherApi.getWeatherByCity(
                     selectedCity, apiKey, "pl", "metric"
-                ) // Ustawienie języka na polski i jednostki na Celsjusze
+                )
                 call.enqueue(object : Callback<WeatherResponse> {
                     override fun onResponse(call: Call<WeatherResponse>, response: Response<WeatherResponse>) {
                         if (response.isSuccessful) {
                             val weather = response.body()
-                            txtWeather.text = "Miasto: ${weather?.name}\n" +
-                                    "Temperatura: ${weather?.main?.temp}°C\n" +
-                                    "Opis: ${weather?.weather?.get(0)?.description}"
+                            txtWeather.text = """
+                                Miasto: ${weather?.name}
+                                Temperatura: ${weather?.main?.temp}°C
+                                Wilgotność: ${weather?.main?.humidity}%
+                                Ciśnienie: ${weather?.main?.pressure} hPa
+                                Prędkość wiatru: ${weather?.wind?.speed} m/s
+                                Kierunek wiatru: ${weather?.wind?.deg}°
+                                Widoczność: ${weather?.visibility} m
+                                Opis: ${weather?.weather?.joinToString { it.description }}
+                            """.trimIndent()
                         } else {
                             txtWeather.text = "Nie udało się pobrać danych o pogodzie."
                         }
@@ -160,10 +172,16 @@ class MainActivity : AppCompatActivity() {
                         ) {
                             if (response.isSuccessful) {
                                 val weather = response.body()
-                                txtWeather.text = "Pogoda dla Twojej lokalizacji:\n" +
-                                        "Miasto: ${weather?.name}\n" +
-                                        "Temperatura: ${weather?.main?.temp}°C\n" +
-                                        "Opis: ${weather?.weather?.get(0)?.description}"
+                                txtWeather.text = """
+                                    Miasto: ${weather?.name}
+                                    Temperatura: ${weather?.main?.temp}°C
+                                    Wilgotność: ${weather?.main?.humidity}%
+                                    Ciśnienie: ${weather?.main?.pressure} hPa
+                                    Prędkość wiatru: ${weather?.wind?.speed} m/s
+                                    Kierunek wiatru: ${weather?.wind?.deg}°
+                                    Widoczność: ${weather?.visibility} m
+                                    Opis: ${weather?.weather?.joinToString { it.description }}
+                                """.trimIndent()
                             } else {
                                 txtWeather.text = "Nie udało się pobrać danych o pogodzie."
                             }

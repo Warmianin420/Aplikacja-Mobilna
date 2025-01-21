@@ -1,43 +1,83 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="#F9F9F9">
 
+    <!-- Nagłówek -->
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pogoda"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:paddingBottom="16dp"
+        android:textColor="#333333" />
+
+    <!-- Pogoda dla bieżącej lokalizacji -->
     <Button
         android:id="@+id/btnGetCurrentWeather"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="48dp"
-        android:text="Get Weather for Current Location" />
+        android:layout_marginBottom="8dp"
+        android:text="Pobierz pogodę dla bieżącej lokalizacji"
+        android:backgroundTint="#6200EE"
+        android:textColor="#FFFFFF" />
 
+    <!-- Spinner dla wyboru miasta -->
     <Spinner
         android:id="@+id/spinnerCity"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_marginTop="16dp"
-        android:entries="@array/city_array" />
+        android:layout_marginBottom="8dp"
+        android:entries="@array/city_array"
+        android:background="@drawable/spinner_background" />
 
+
+    <!-- Pogoda dla wybranego miasta -->
     <Button
         android:id="@+id/btnCheckWeather"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="48dp"
-        android:layout_marginTop="16dp"
-        android:text="Check Weather for Selected City" />
+        android:layout_marginBottom="8dp"
+        android:text="Sprawdź pogodę dla wybranego miasta"
+        android:backgroundTint="#6200EE"
+        android:textColor="#FFFFFF" />
 
+    <!-- Pogoda dla lokalizacji GPS -->
     <Button
         android:id="@+id/btnGetWeatherByLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Pogoda dla mojej lokalizacji" />
-
-    <TextView
-        android:id="@+id/txtWeatherResult"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Weather data will appear here"
-        android:paddingTop="16dp"
-        android:textSize="16sp" />
+        android:minHeight="48dp"
+        android:layout_marginBottom="16dp"
+        android:text="Pobierz pogodę dla mojej lokalizacji"
+        android:backgroundTint="#6200EE"
+        android:textColor="#FFFFFF" />
+
+    <!-- Karta na dane pogodowe -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        app:cardElevation="4dp"
+        app:cardCornerRadius="8dp"
+        android:padding="16dp"
+        android:backgroundTint="#FFFFFF">
+
+        <TextView
+            android:id="@+id/txtWeatherResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tutaj pojawią się dane pogodowe"
+            android:textSize="16sp"
+            android:textColor="#333333" />
+    </androidx.cardview.widget.CardView>
 
 </LinearLayout>
