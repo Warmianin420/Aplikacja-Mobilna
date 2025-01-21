@@ -26,7 +26,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val btnCurrentWeather = findViewById<Button>(R.id.btnGetCurrentWeather)
         val btnCheckWeather = findViewById<Button>(R.id.btnCheckWeather)
         val btnWeatherByLocation = findViewById<Button>(R.id.btnGetWeatherByLocation)
         val spinnerCity = findViewById<Spinner>(R.id.spinnerCity)
@@ -40,61 +39,7 @@ class MainActivity : AppCompatActivity() {
             .build()
 
         val weatherApi = retrofit.create(WeatherApiService::class.java)
-
-        // Obsługa przycisku "Pogoda dla bieżącej lokalizacji"
-        btnCurrentWeather.setOnClickListener {
-            if (ActivityCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.ACCESS_FINE_LOCATION
-                ) != PackageManager.PERMISSION_GRANTED
-            ) {
-                ActivityCompat.requestPermissions(
-                    this,
-                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                    100
-                )
-                return@setOnClickListener
-            }
-
-            fusedLocationClient.lastLocation.addOnSuccessListener { location ->
-                if (location != null) {
-                    val call = weatherApi.getWeatherByCoordinates(
-                        location.latitude,
-                        location.longitude,
-                        apiKey,
-                        "pl", // Język na polski
-                        "metric" // Jednostki: stopnie Celsjusza
-                    )
-                    call.enqueue(object : Callback<WeatherResponse> {
-                        override fun onResponse(call: Call<WeatherResponse>, response: Response<WeatherResponse>) {
-                            if (response.isSuccessful) {
-                                val weather = response.body()
-                                txtWeather.text = """
-                                    Miasto: ${weather?.name}
-                                    Temperatura: ${weather?.main?.temp}°C
-                                    Wilgotność: ${weather?.main?.humidity}%
-                                    Ciśnienie: ${weather?.main?.pressure} hPa
-                                    Prędkość wiatru: ${weather?.wind?.speed} m/s
-                                    Kierunek wiatru: ${weather?.wind?.deg}°
-                                    Widoczność: ${weather?.visibility} m
-                                    Opis: ${weather?.weather?.joinToString { it.description }}
-                                """.trimIndent()
-                            } else {
-                                txtWeather.text = "Nie udało się pobrać danych o pogodzie."
-                                Log.e("WeatherResponse", "Błąd odpowiedzi API: ${response.errorBody()?.string()}")
-                            }
-                        }
-
-                        override fun onFailure(call: Call<WeatherResponse>, t: Throwable) {
-                            txtWeather.text = "Błąd: ${t.message}"
-                        }
-                    })
-                } else {
-                    txtWeather.text = "Nie można uzyskać lokalizacji. Spróbuj ponownie."
-                }
-            }
-        }
-
+        
         // Obsługa wyboru miasta z rozwijanej listy
         spinnerCity.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
@@ -157,12 +102,13 @@ class MainActivity : AppCompatActivity() {
             }
 
             fusedLocationClient.lastLocation.addOnSuccessListener { location ->
+                Log.d("DEBUG", "Czy lokalizacja jest dostępna: ${location?.latitude}, ${location?.longitude}")
                 if (location != null) {
                     val call = weatherApi.getWeatherByCoordinates(
                         location.latitude,
                         location.longitude,
                         apiKey,
-                        "pl", // Ustawienie języka na polski
+                        "pl", // Język na polski
                         "metric" // Jednostki: stopnie Celsjusza
                     )
                     call.enqueue(object : Callback<WeatherResponse> {

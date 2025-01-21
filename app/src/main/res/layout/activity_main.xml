@@ -19,15 +19,6 @@
         android:textColor="#333333" />
 
     <!-- Pogoda dla bieżącej lokalizacji -->
-    <Button
-        android:id="@+id/btnGetCurrentWeather"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        android:layout_marginBottom="8dp"
-        android:text="Pobierz pogodę dla bieżącej lokalizacji"
-        android:backgroundTint="#6200EE"
-        android:textColor="#FFFFFF" />
 
     <!-- Spinner dla wyboru miasta -->
     <Spinner
