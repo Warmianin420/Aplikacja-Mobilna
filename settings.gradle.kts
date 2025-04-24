@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Projekt"
+rootProject.name = "Pogoda"
 include(":app")
- 
+include(":build.gradle.kts")

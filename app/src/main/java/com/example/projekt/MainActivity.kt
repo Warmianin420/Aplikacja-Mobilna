@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
                         if (response.isSuccessful) {
                             val weather = response.body()
                             txtWeather.text = """
-                                Miasto: ${weather?.name}
+                                Lokalizacja: ${weather?.name}
                                 Temperatura: ${weather?.main?.temp}°C
                                 Wilgotność: ${weather?.main?.humidity}%
                                 Ciśnienie: ${weather?.main?.pressure} hPa
